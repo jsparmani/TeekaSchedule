@@ -80,7 +80,8 @@ def get_parent_details(request):
             f_dob=form.cleaned_data['f_dob']
             m_dob=form.cleaned_data['m_dob']
 
-            user = models.ParentUser.objects.get(user__exact=request.user)
+            print(request.user.username)
+            user = models.ParentUser.objects.get(user__username__exact=request.user.username)
             user.f_name = f_name
             user.m_name = m_name
             user.f_dob = f_dob

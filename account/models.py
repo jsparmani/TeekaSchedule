@@ -15,8 +15,8 @@ class ParentUser(models.Model):
         auth.models.User, related_name='parentusers', on_delete=models.CASCADE)
     f_name = models.CharField(max_length=50, blank=True)
     m_name = models.CharField(max_length=50, blank=True)
-    f_dob = models.DateField(blank=True)
-    m_dob = models.DateField(blank=True)
+    f_dob = models.DateField(blank=True, null=True)
+    m_dob = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.user.username
