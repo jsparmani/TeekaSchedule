@@ -34,3 +34,25 @@ def add_child(request):
     else:
         form = forms.AddChildForm()
         return render(request, 'parent/add_child.html', {'form': form})
+
+
+def edit_vaccine(request):
+    if request.method == 'POST':
+        form = forms.EditVaccineForm(request.POST)
+        if form.is_valid():
+            vaccine_list = models.Vaccine.objects.all().filter(
+                date__lte=datetime.now(), status__exact=False)
+            for vaccine in vaccine_list:
+                try:
+                    status = form.cleaned_data[vaccine.name]
+                    print(status)
+                    vaccine.status = status
+                    vaccine.save()
+                except:
+                    continue
+            return redirect('home')
+        else:
+            return redirect('fault', fault="Server Error!")
+    else:
+        form = forms.EditVaccineForm()
+        return render(request, 'parent/edit_vaccine.html', {'form': form})

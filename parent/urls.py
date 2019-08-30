@@ -5,4 +5,5 @@ app_name = 'parent'
 
 urlpatterns = [
     path('add-child/', views.add_child, name='add_child'),
+    path('edit-vaccine/', views.edit_vaccine, name='edit_vaccine'),
 ]

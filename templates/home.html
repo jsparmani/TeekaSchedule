@@ -5,6 +5,7 @@
 {% if user.is_authenticated %}
 <a href="{% url 'account:get_parent_details' %}">Fill Details</a>
 <a href="{% url 'parent:add_child' %}">Add Child</a>
+<a href="{% url 'parent:edit_vaccine' %}">Edit Vaccines</a>
 <a href="{% url 'account:logout' %}">Logout</a>
 {% endif %}
 {% endblock %}
