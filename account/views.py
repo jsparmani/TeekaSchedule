@@ -75,13 +75,17 @@ def get_parent_details(request):
     if request.method == 'POST':
         form = forms.ParentDetailsForm(request.POST)
         if form.is_valid():
-            f_name=form.cleaned_data['f_name']
-            m_name=form.cleaned_data['m_name']
-            f_dob=form.cleaned_data['f_dob']
-            m_dob=form.cleaned_data['m_dob']
+            f_name = form.cleaned_data['f_name']
+            m_name = form.cleaned_data['m_name']
+            f_dob = form.cleaned_data['f_dob']
+            m_dob = form.cleaned_data['m_dob']
 
             print(request.user.username)
-            user = models.ParentUser.objects.get(user__username__exact=request.user.username)
+            try:
+                user = models.ParentUser.objects.get(
+                    user__username__exact=request.user.username)
+            except:
+                return redirect('fault', fault="Server Error")
             user.f_name = f_name
             user.m_name = m_name
             user.f_dob = f_dob
@@ -95,4 +99,3 @@ def get_parent_details(request):
     else:
         form = forms.ParentDetailsForm()
         return render(request, 'account/get_parent_details.html', {'form': form})
-
