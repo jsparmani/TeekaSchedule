@@ -75,6 +75,7 @@ def get_parent_details(request):
     if request.method == 'POST':
         form = forms.ParentDetailsForm(request.POST)
         if form.is_valid():
+            address = form.cleaned_data['address']
             f_name = form.cleaned_data['f_name']
             m_name = form.cleaned_data['m_name']
             f_dob = form.cleaned_data['f_dob']
@@ -90,6 +91,7 @@ def get_parent_details(request):
             user.m_name = m_name
             user.f_dob = f_dob
             user.m_dob = m_dob
+            user.address = address
 
             user.save()
 

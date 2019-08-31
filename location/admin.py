@@ -5,3 +5,4 @@ from . import models
 admin.site.register(models.Cluster)
 admin.site.register(models.Locality)
 admin.site.register(models.Ward)
+admin.site.register(models.Hosptial)

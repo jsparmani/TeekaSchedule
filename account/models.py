@@ -13,6 +13,7 @@ class ParentUser(models.Model):
 
     user = models.ForeignKey(
         auth.models.User, related_name='parentusers', on_delete=models.CASCADE)
+    address = models.TextField(blank=True)
     f_name = models.CharField(max_length=50, blank=True)
     m_name = models.CharField(max_length=50, blank=True)
     f_dob = models.DateField(blank=True, null=True)
