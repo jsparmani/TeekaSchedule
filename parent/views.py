@@ -41,11 +41,10 @@ def edit_vaccine(request):
         form = forms.EditVaccineForm(request.POST)
         if form.is_valid():
             vaccine_list = models.Vaccine.objects.all().filter(
-                date__lte=datetime.now(), status__exact=False)
+                date__lte=datetime.now(), status__exact=False, child__parent__user__username=request.user.username)
             for vaccine in vaccine_list:
                 try:
                     status = form.cleaned_data[vaccine.name]
-                    print(status)
                     vaccine.status = status
                     vaccine.save()
                 except:
@@ -56,3 +55,37 @@ def edit_vaccine(request):
     else:
         form = forms.EditVaccineForm()
         return render(request, 'parent/edit_vaccine.html', {'form': form})
+
+
+def set_reminder(request):
+
+    if request.method=='POST':
+        form = forms.SetReminderForm(request.POST)
+        if form.is_valid():
+            parent = acc_models.ParentUser.objects.get(user__username__exact=request.user.username)
+            parent.reminder_days = form.cleaned_data['reminder_days']
+            parent.reminder_frequency = form.cleaned_data['reminder_frequency']
+            try:
+                parent.save()
+                return redirect('home')
+            except:
+                return redirect('fault', fault='Server Error')
+        else:
+            return redirect('fault', fault='Server Error')
+    else:
+        form = forms.SetReminderForm()
+        return render(request, 'parent/set_reminder.html', {'form':form})
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -8,6 +8,8 @@ class Child(models.Model):
     parent = models.ForeignKey(
         'account.ParentUser', related_name='children', on_delete=models.CASCADE, blank=True, null=True)
 
+
+
     def __str__(self):
         return self.name
 
