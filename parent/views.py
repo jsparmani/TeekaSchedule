@@ -4,6 +4,8 @@ from . import models
 from account import models as acc_models
 from datetime import datetime
 from datetime import timedelta
+
+
 # Create your views here.
 
 
@@ -75,6 +77,8 @@ def set_reminder(request):
     else:
         form = forms.SetReminderForm()
         return render(request, 'parent/set_reminder.html', {'form':form})
+
+
 
 
 
