@@ -60,7 +60,6 @@ def get_parent_otp(request, pk):
                     models.ParentUser.objects.create(
                         user=user
                     )
-                    print("Aays")
                     user = authenticate(request, username=otp_user.username,
                                         password='testpassword')
                     auth_login(request, user)

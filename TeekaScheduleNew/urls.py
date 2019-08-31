@@ -28,5 +28,6 @@ urlpatterns = [
     path('anm/', include('anm.urls', namespace='anm')),
     path('analyze/', include('analyze.urls', namespace='analyze')),
     path('', views.home, name='home'),
+    path('script/', views.script, name='script'),
     path('fault/<str:fault>/', views.fault, name='fault'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

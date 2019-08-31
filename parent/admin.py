@@ -5,6 +5,7 @@ from . import models
 
 class VaccineAdmin(admin.ModelAdmin):
     list_display = ['name', 'child', 'status']
+    list_filter = ['child']
 
 
 class ReminderAdmin(admin.ModelAdmin):

@@ -13,7 +13,7 @@ class ParentUser(models.Model):
 
     user = models.OneToOneField(
         auth.models.User, related_name='parentusers', on_delete=models.CASCADE)
-    address = models.OneToOneField(
+    address = models.ForeignKey(
         'location.Locality', related_name='parents', on_delete=models.CASCADE, blank=True, null=True)
     f_name = models.CharField(max_length=50, blank=True)
     m_name = models.CharField(max_length=50, blank=True)
