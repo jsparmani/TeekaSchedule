@@ -1,19 +1,128 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TeekASchedule</title>
+    <title>Tabs</title>
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     {% block head %}
     {% endblock %}
+
+    <style>
+        .footer-tabs {
+            width: 100%;
+            position: fixed;
+            bottom: 0px;
+        }
+
+        .tab_1_div {
+            display: block;
+        }
+
+        .tab_2_div {
+            display: none;
+        }
+
+        .tab_3_div {
+            display: none;
+        }
+
+        .icon-container .icon-preview {
+            height: 120px;
+            text-align: center;
+        }
+    </style>
+
+
 </head>
 
 <body>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+    <header>
+        <nav class="nav-wrapper indigo">
+            <div class="container">
+                <a href="{% url 'home' %}" class="brand-logo">TK Schedule</a>
+                <a href="#" class="sidenav-trigger" data-target="mobile-menu">
+                    <i class="material-icons">menu</i>
+                </a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#">Photos</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <ul class="sidenav indigo" id="mobile-menu">
+                    <li><a href="#" class="white-text">Photos</a></li>
+                    <li><a href="#" class="white-text">Services</a></li>
+                    <li><a href="#" class="white-text">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
     {% block content %}
     {% endblock %}
+
+    <div class="row footer-tabs hide-on-med-and-up">
+        <div class="col s12 l12 m12" style="margin-left: 25px;">
+            <div class="tab_1 col s4 l4 m4" onclick="loginFunc('')">
+                <i class="material-icons home-icon" style="margin-left: 6px;">home</i>
+                <br>
+                <span>Home</span>
+            </div>
+            <div class="tab_2 col s4 l4 m4" onclick="loginFunc('')">
+                <i class="material-icons info-icon" style="margin-left: 7px;">info</i>
+                <br>
+                <span>About</span>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="tab_3 col s4 l4 m4" onclick="loginFunc('account/logout')">
+                <i class="material-icons person-icon" style="margin-left: 3px;">exit_to_app</i>
+                <br>
+                <span>Logout</span>
+            </div>
+            {% endif %}
+            {% if not user.is_authenticated %}
+            <div class="tab_3 col s4 l4 m4" onclick="loginFunc('account/parent-username')">
+                <i class="material-icons person-icon" style="margin-left: 3px;">person</i>
+                <br>
+                <span>Login</span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+
+        let BASE_URL = 'http://127.0.0.1:8000'
+
+        let loginFunc = str => {
+            var url = `${BASE_URL}/${str}`
+            window.location.href = url;
+        }
+
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+            $('.slider').slider();
+            $('.datepicker').datepicker({
+                disableWeekends: false,
+                yearRange: 20,
+                format: 'yyyy-mm-dd'
+            });
+            $('select').formSelect();
+        });
+
+    </script>
+
+    <script src="{% static 'js/materialize.min.js' %}"></script>
 </body>
 
 </html>

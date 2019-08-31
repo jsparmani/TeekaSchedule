@@ -14,6 +14,11 @@ class ParentOTPForm(forms.Form):
 
 class ParentDetailsForm(forms.Form):
 
+    f_name = forms.CharField()
+    m_name = forms.CharField()
+    f_dob = forms.DateField()
+    m_dob = forms.DateField()
+
     def __init__(self, *args, **kwargs):
         super(ParentDetailsForm, self).__init__(*args, **kwargs)
 
@@ -21,8 +26,7 @@ class ParentDetailsForm(forms.Form):
             (x, x) for x in [u['name'] for u in loc_models.Locality.objects.all().values('name')]]
 
         self.fields['address'] = forms.ChoiceField(choices=LOCALITY_CHOICES)
-
-    f_name = forms.CharField()
-    m_name = forms.CharField()
-    f_dob = forms.DateField()
-    m_dob = forms.DateField()
+        self.fields['f_dob'].widget.attrs['id'] = 'date'
+        self.fields['m_dob'].widget.attrs['id'] = 'date'
+        self.fields['f_dob'].widget.attrs['class'] = 'datepicker'
+        self.fields['m_dob'].widget.attrs['class'] = 'datepicker'

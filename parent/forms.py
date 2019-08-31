@@ -8,6 +8,11 @@ class AddChildForm(forms.Form):
     name = forms.CharField()
     dob = forms.DateField()
 
+    def __init__(self, *args, **kwargs):
+        super(AddChildForm, self).__init__(*args, **kwargs)
+        self.fields['dob'].widget.attrs['id'] = 'date'
+        self.fields['dob'].widget.attrs['class'] = 'datepicker'
+
 
 class EditVaccineForm(forms.Form):
 
