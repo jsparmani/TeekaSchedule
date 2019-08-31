@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <p><a href={% url 'account:get_parent_username' %}>Start</a></p>
 
-{% if user.is_authenticated %}
+<a href="{% url 'location:get_nearby_hospital' %}">Nearby Hospitals</a> {% if user.is_authenticated %}
 <a href="{% url 'account:get_parent_details' %}">Fill Details</a>
 <a href="{% url 'parent:add_child' %}">Add Child</a>
 <a href="{% url 'parent:edit_vaccine' %}">Edit Vaccines</a>
