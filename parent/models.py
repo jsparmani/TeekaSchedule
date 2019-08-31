@@ -61,3 +61,19 @@ class ReminderANM(models.Model):
 
     def __str__(self):
         return f'{self.child} {self.date}'
+
+
+class AEFI(models.Model):
+    child = models.ForeignKey('parent.Child', related_name='AEFIs', on_delete=models.CASCADE)
+    vaccine = models.CharField(max_length=100)
+    pain = models.BooleanField()
+    swelling = models.BooleanField()
+    redness = models.BooleanField()
+    fever = models.BooleanField()
+    irritability = models.BooleanField()
+    malaise = models.BooleanField()
+    crying = models.BooleanField()
+
+
+    def __str__(self):
+        return self.child.name

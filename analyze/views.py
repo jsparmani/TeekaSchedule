@@ -41,7 +41,6 @@ def ward_level_analysis(request):
 
 
 
-
 def cluster_level_analysis(request):
     cluster_user = acc_models.ClusterUser.objects.get(user__username__exact=request.user.username)
     cluster = cluster_user.cluster
@@ -53,14 +52,14 @@ def cluster_level_analysis(request):
     locality_list = []
 
     for ward in ward_list:
+        locality_list=[]
         localities = ward.localities.all()
         for loc in localities:
             locality_list.append(loc.pk)
-
-
-    for ward in ward_list:
         data[0].append(parent_models.Vaccine.objects.all().filter(child__parent__address__in=locality_list, date__lte=datetime.now(), status__exact=True).count())
         data[1].append(parent_models.Vaccine.objects.all().filter(child__parent__address__in=locality_list, date__lte=datetime.now(), status__exact=False).count())
+
+       
 
     
 
@@ -86,7 +85,7 @@ def district_level_analysis(request):
     district_user = acc_models.DistrictUser.objects.get(user__username__exact=request.user.username)
     district = district_user.district
     cluster_list = district.clusters.all()
-    data_series = [u['cluster'] for u in cluster_list.values('cluster') ]
+    data_series = [u['cluster_id'] for u in cluster_list.values('cluster_id') ]
     labels = ['Vaccinated','Unvaccinated']
     data = [[],[]]
 
@@ -94,17 +93,16 @@ def district_level_analysis(request):
 
 
     for cluster in cluster_list:
+        locality_list = []
         ward_list = cluster.wards.all()
         for ward in ward_list:
             localities = ward.localities.all()
             for loc in localities:
                 locality_list.append(loc.pk)
-            
-
-
-    for cluster in cluster_list:
         data[0].append(parent_models.Vaccine.objects.all().filter(child__parent__address__in=locality_list, date__lte=datetime.now(), status__exact=True).count())
         data[1].append(parent_models.Vaccine.objects.all().filter(child__parent__address__in=locality_list, date__lte=datetime.now(), status__exact=False).count())
+            
+        
 
     
 
@@ -123,3 +121,6 @@ def district_level_analysis(request):
     jsondata = json.dumps(jsondata)
 
     return render(request, 'analyze/graph.html', {'jsondata': jsondata})
+
+
+

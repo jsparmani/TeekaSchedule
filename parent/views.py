@@ -5,6 +5,8 @@ from account import models as acc_models
 from datetime import datetime
 from datetime import timedelta
 
+import datetime as datetime_whole
+
 # Create your views here.
 
 
@@ -52,12 +54,17 @@ def add_child(request):
         return render(request, 'parent/add_child.html', {'form': form})
 
 
-def edit_vaccine(request):
+def edit_vaccine_child(request):
+
+    child_list = models.Child.objects.all().filter(parent__user__username__exact=request.user.username)
+    return render(request, 'parent/child_list_vaccine.html', {'child_list': child_list})
+
+def edit_vaccine(request, pk):
     if request.method == 'POST':
-        form = forms.EditVaccineForm(request.user, request.POST)
+        form = forms.EditVaccineForm(data=request.POST, user=request.user, pk=pk)
         if form.is_valid():
             vaccine_list = models.Vaccine.objects.all().filter(
-                date__lte=datetime.now(), status__exact=False, child__parent__user__username=request.user.username)
+                date__lte=datetime.now(), status__exact=False, child__parent__user__username=request.user.username, child__pk__exact=pk)
             for vaccine in vaccine_list:
                 try:
                     status = form.cleaned_data[vaccine.name]
@@ -69,7 +76,7 @@ def edit_vaccine(request):
         else:
             return redirect('fault', fault="Server Error!")
     else:
-        form = forms.EditVaccineForm(request.user)
+        form = forms.EditVaccineForm(user=request.user, pk=pk)
         return render(request, 'parent/edit_vaccine.html', {'form': form})
 
 
@@ -119,3 +126,53 @@ def list_child_vaccine(request, pk):
     print(vaccine_list)
 
     return render(request, 'parent/list_child_vaccine.html', {'vaccine_list': vaccine_list})
+
+
+def report_aefi_child(request):
+
+    child_list = models.Child.objects.all().filter(parent__user__username__exact=request.user.username)
+    return render(request, 'parent/child_list_aefi.html', {'child_list': child_list})
+
+
+def report_aefi(request, pk):
+
+    if request.method=='POST':
+        form = forms.AEFIForm(request.POST)
+        if form.is_valid():
+
+
+            child_age = (datetime_whole.date.today() - models.Child.objects.get(pk__exact=pk).dob).days 
+
+            vaccine_min = ''
+            vaccine_duration_min = 10000
+            vaccine_list = models.VaccinationData.objects.all()
+
+            for vac in vaccine_list:
+                try:
+                    print(models.Vaccine.objects.get(child__pk__exact=pk, name__exact=vac.name, status__exact=True))
+                except:
+                    continue
+                diff = child_age-vac.duration
+                print(child_age, diff)
+                if (diff>0):
+                    if(diff<vaccine_duration_min):
+                        vaccine_min = vac.name
+                        vaccine_duration_min = vac.duration
+                    elif(diff == vaccine_duration_min):
+                        vaccine_min = vaccine_min + f', {vac.name}'
+                    else:
+                        continue
+                else:
+                    break
+
+
+            aefi = form.save(commit=False)
+            aefi.child =  models.Child.objects.get(pk__exact=pk)
+            aefi.vaccine = vaccine_min
+            aefi.save()
+            return redirect('home')
+        else:
+            return redirect('fault', fault='Server Error')
+    else:
+        form = forms.AEFIForm()
+        return render(request, 'parent/get_aefi_details.html', {'form': form})

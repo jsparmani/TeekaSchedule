@@ -1,0 +1,7 @@
+{% extends 'base.html' %} {% block content %}
+<ul>
+    {% for child in child_list %}
+    <li><a href="{% url 'parent:report_aefi' pk=child.pk %}">{{child.name}}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

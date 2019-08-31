@@ -11,10 +11,10 @@ class AddChildForm(forms.Form):
 
 class EditVaccineForm(forms.Form):
 
-    def __init__(self, user, *args, **kwargs):
+    def __init__(self, user, pk, *args, **kwargs):
         super(EditVaccineForm, self).__init__(*args, **kwargs)
         vaccine_list = models.Vaccine.objects.all().filter(
-            date__lte=datetime.now(), status__exact=False, child__parent__user__username__exact=user.username)
+            date__lte=datetime.now(), status__exact=False, child__parent__user__username__exact=user.username, child__pk__exact=pk)
         for vaccine in vaccine_list:
             self.fields[vaccine.name] = forms.BooleanField(required=False)
 
@@ -25,3 +25,9 @@ class SetReminderForm(forms.Form):
 
     reminder_days = forms.IntegerField()
     reminder_frequency = forms.ChoiceField(choices=FREQUENCY_CHOICES)
+
+
+class AEFIForm(forms.ModelForm):
+    class Meta():
+        model = models.AEFI
+        exclude = ['child','vaccine']
