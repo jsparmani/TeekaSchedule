@@ -9,7 +9,7 @@ import requests
 def home(request):
 
     def automatic_task():
-        threading.Timer(5.0, automatic_task).start()
+        threading.Timer(86400.0, automatic_task).start()
         reminders = parent_models.Reminder.objects.all().filter(date__exact='2019-10-04')
 
         # SEND MESSAGE TO PARENTS
@@ -25,9 +25,9 @@ def home(request):
         for reminder in reminders_anm:
             print(reminder.user.phone)
             print(reminder.child.name,
-                reminder.child.parent.f_name,
-                reminder.vaccine.name,
-                reminder.vaccine.date)
+                  reminder.child.parent.f_name,
+                  reminder.vaccine.name,
+                  reminder.vaccine.date)
 
             # link = f'https://2factor.in/API/R1/?module=TRANS_SMS&apikey={api_key}&to={phone_num}&from=TKSCHD&templatename={template_name}&var1={name}&var2={complaint_type}&var3={}'
             # requests.get(link)
