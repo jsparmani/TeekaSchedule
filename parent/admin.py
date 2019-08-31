@@ -4,9 +4,13 @@ from . import models
 
 
 class VaccineAdmin(admin.ModelAdmin):
-    list_display = ['name', 'status']
+    list_display = ['name', 'child' ,'status']
+
+class ReminderAdmin(admin.ModelAdmin):
+    list_display = ['parent', 'date', 'vaccine']
 
 
 admin.site.register(models.Child)
 admin.site.register(models.VaccinationData)
 admin.site.register(models.Vaccine, VaccineAdmin)
+admin.site.register(models.Reminder, ReminderAdmin)

@@ -36,3 +36,13 @@ class Vaccine(models.Model):
 
     def __str__(self):
         return f'{self.name}-{self.child}'
+
+
+class Reminder(models.Model):
+
+    parent = models.ForeignKey('account.ParentUser', related_name="reminders", on_delete=models.CASCADE)
+    vaccine = models.ForeignKey('parent.Vaccine', related_name='reminders', on_delete=models.CASCADE)
+    date = models.DateField()
+
+    def __str__(self):
+        return f'{self.parent} {self.date}'

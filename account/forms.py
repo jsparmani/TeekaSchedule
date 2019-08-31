@@ -13,7 +13,6 @@ class ParentOTPForm(forms.Form):
 
 class ParentDetailsForm(forms.Form):
 
-    address = forms.Textarea()
     f_name = forms.CharField()
     m_name = forms.CharField()
     f_dob = forms.DateField()

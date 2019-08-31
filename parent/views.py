@@ -67,11 +67,22 @@ def set_reminder(request):
             parent = acc_models.ParentUser.objects.get(user__username__exact=request.user.username)
             parent.reminder_days = form.cleaned_data['reminder_days']
             parent.reminder_frequency = form.cleaned_data['reminder_frequency']
-            try:
-                parent.save()
-                return redirect('home')
-            except:
-                return redirect('fault', fault='Server Error')
+            
+            parent.save()
+
+            vaccine_list = models.Vaccine.objects.all().filter(child__parent__user__username=parent.user.username, status__exact=False, date__gte=datetime.now())
+
+
+            for vaccine in vaccine_list:
+
+                for i in range(1,(int(parent.reminder_days)//int(parent.reminder_frequency))+1):
+                    models.Reminder.objects.create(
+                        parent=parent,
+                        vaccine=vaccine,
+                        date=(vaccine.date) - timedelta(days=i*int(parent.reminder_frequency))
+                    )
+
+            return redirect('home')
         else:
             return redirect('fault', fault='Server Error')
     else:
