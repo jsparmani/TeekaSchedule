@@ -26,6 +26,7 @@ urlpatterns = [
     path('parent/', include('parent.urls', namespace='parent')),
     path('location/', include('location.urls', namespace='location')),
     path('anm/', include('anm.urls', namespace='anm')),
+    path('analyze/', include('analyze.urls', namespace='analyze')),
     path('', views.home, name='home'),
     path('fault/<str:fault>/', views.fault, name='fault'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

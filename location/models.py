@@ -1,7 +1,22 @@
 from django.db import models
 
 
+class District(models.Model):
+    district_id = models.PositiveIntegerField(blank=False)
+    district_inspector_name = models.CharField(max_length=50, blank=False)
+    district_inspector_phone = models.PositiveIntegerField(blank=False)
+    district_inspector_email = models.EmailField()
+    lat = models.CharField(max_length=20)
+    lng = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f'{self.district_id}'
+
+
+
 class Cluster(models.Model):
+    district = models.ForeignKey(
+        'location.District', related_name='clusters', on_delete=models.CASCADE)
     cluster_id = models.PositiveIntegerField(blank=False)
     cluster_inspector_name = models.CharField(max_length=50, blank=False)
     cluster_inspector_phone = models.PositiveIntegerField(blank=False)

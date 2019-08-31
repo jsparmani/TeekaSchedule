@@ -61,6 +61,17 @@ class ClusterUser(models.Model):
         return self.user.username
 
 
+class DistrictUser(models.Model):
+
+    user = models.OneToOneField(
+        auth.models.User, related_name='districtusers', on_delete=models.CASCADE)
+    district = models.OneToOneField(
+        'location.District', related_name='districtusersdistrict', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
+
+
 class OTP(models.Model):
 
     username = models.PositiveIntegerField(blank=False)
