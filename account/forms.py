@@ -1,4 +1,5 @@
 from django import forms
+from location import models as loc_models
 
 
 class ParentUsernameForm(forms.Form):
@@ -12,6 +13,14 @@ class ParentOTPForm(forms.Form):
 
 
 class ParentDetailsForm(forms.Form):
+
+    def __init__(self, *args, **kwargs):
+        super(ParentDetailsForm, self).__init__(*args, **kwargs)
+
+        LOCALITY_CHOICES = [
+            (x, x) for x in [u['name'] for u in loc_models.Locality.objects.all().values('name')]]
+
+        self.fields['address'] = forms.ChoiceField(choices=LOCALITY_CHOICES)
 
     f_name = forms.CharField()
     m_name = forms.CharField()

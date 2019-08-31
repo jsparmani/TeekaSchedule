@@ -69,6 +69,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'account.context_processors.UserList',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -143,6 +145,3 @@ EMAIL_HOST_PASSWORD = 'EMAIL_HOST_PASSWORD'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = MEDIA_DIR
-
-
-

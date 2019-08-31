@@ -8,8 +8,6 @@ class Child(models.Model):
     parent = models.ForeignKey(
         'account.ParentUser', related_name='children', on_delete=models.CASCADE, blank=True, null=True)
 
-
-
     def __str__(self):
         return self.name
 
@@ -40,8 +38,10 @@ class Vaccine(models.Model):
 
 class Reminder(models.Model):
 
-    parent = models.ForeignKey('account.ParentUser', related_name="reminders", on_delete=models.CASCADE)
-    vaccine = models.ForeignKey('parent.Vaccine', related_name='reminders', on_delete=models.CASCADE)
+    parent = models.ForeignKey(
+        'account.ParentUser', related_name="reminders", on_delete=models.CASCADE)
+    vaccine = models.ForeignKey(
+        'parent.Vaccine', related_name='reminders', on_delete=models.CASCADE)
     date = models.DateField()
 
     def __str__(self):

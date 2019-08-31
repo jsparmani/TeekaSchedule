@@ -40,7 +40,7 @@ def add_child(request):
 
 def edit_vaccine(request):
     if request.method == 'POST':
-        form = forms.EditVaccineForm(request.POST)
+        form = forms.EditVaccineForm(request.user, request.POST)
         if form.is_valid():
             vaccine_list = models.Vaccine.objects.all().filter(
                 date__lte=datetime.now(), status__exact=False, child__parent__user__username=request.user.username)
@@ -55,31 +55,33 @@ def edit_vaccine(request):
         else:
             return redirect('fault', fault="Server Error!")
     else:
-        form = forms.EditVaccineForm()
+        form = forms.EditVaccineForm(request.user)
         return render(request, 'parent/edit_vaccine.html', {'form': form})
 
 
 def set_reminder(request):
 
-    if request.method=='POST':
+    if request.method == 'POST':
         form = forms.SetReminderForm(request.POST)
         if form.is_valid():
-            parent = acc_models.ParentUser.objects.get(user__username__exact=request.user.username)
+            parent = acc_models.ParentUser.objects.get(
+                user__username__exact=request.user.username)
             parent.reminder_days = form.cleaned_data['reminder_days']
             parent.reminder_frequency = form.cleaned_data['reminder_frequency']
-            
+
             parent.save()
 
-            vaccine_list = models.Vaccine.objects.all().filter(child__parent__user__username=parent.user.username, status__exact=False, date__gte=datetime.now())
-
+            vaccine_list = models.Vaccine.objects.all().filter(child__parent__user__username=parent.user.username,
+                                                               status__exact=False, date__gte=datetime.now())
 
             for vaccine in vaccine_list:
 
-                for i in range(1,(int(parent.reminder_days)//int(parent.reminder_frequency))+1):
+                for i in range(1, (int(parent.reminder_days)//int(parent.reminder_frequency))+1):
                     models.Reminder.objects.create(
                         parent=parent,
                         vaccine=vaccine,
-                        date=(vaccine.date) - timedelta(days=i*int(parent.reminder_frequency))
+                        date=(vaccine.date) - timedelta(days=i *
+                                                        int(parent.reminder_frequency))
                     )
 
             return redirect('home')
@@ -87,20 +89,19 @@ def set_reminder(request):
             return redirect('fault', fault='Server Error')
     else:
         form = forms.SetReminderForm()
-        return render(request, 'parent/set_reminder.html', {'form':form})
+        return render(request, 'parent/set_reminder.html', {'form': form})
 
 
+def list_child(request):
+
+    children = models.Child.objects.all().filter(
+        parent__user__username__exact=request.user.username)
+
+    return render(request, 'parent/list_child.html', {'children': children})
 
 
+def list_child_vaccine(request, pk):
+    vaccine_list = models.Child.objects.get(pk__exact=pk).vaccinnes.all()
+    print(vaccine_list)
 
-
-
-
-
-
-
-
-
-
-
-
+    return render(request, 'parent/list_child_vaccine.html', {'vaccine_list': vaccine_list})

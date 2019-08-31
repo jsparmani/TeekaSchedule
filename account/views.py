@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
 from datetime import datetime
+from location import models as loc_models
 # Create your views here.
 
 
@@ -54,10 +55,12 @@ def get_parent_otp(request, pk):
                         username=otp_user.username,
                         password='testpassword'
                     )
+
                     user.save()
                     models.ParentUser.objects.create(
                         user=user
                     )
+                    print("Aays")
                     user = authenticate(request, username=otp_user.username,
                                         password='testpassword')
                     auth_login(request, user)
@@ -75,7 +78,7 @@ def get_parent_details(request):
     if request.method == 'POST':
         form = forms.ParentDetailsForm(request.POST)
         if form.is_valid():
-            # address = form.cleaned_data['address']
+            address = form.cleaned_data['address']
             f_name = form.cleaned_data['f_name']
             m_name = form.cleaned_data['m_name']
             f_dob = form.cleaned_data['f_dob']
@@ -91,7 +94,7 @@ def get_parent_details(request):
             user.m_name = m_name
             user.f_dob = f_dob
             user.m_dob = m_dob
-            # user.address = address
+            user.address = loc_models.Locality.objects.get(name__exact=address)
 
             user.save()
 

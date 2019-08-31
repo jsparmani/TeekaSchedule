@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for child in children %}
+<a href="{% url 'parent:list_child_vaccine' pk=child.pk %}">{{child.name}}</a>
+{% endfor %}
+{% endblock %}
