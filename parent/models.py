@@ -46,3 +46,18 @@ class Reminder(models.Model):
 
     def __str__(self):
         return f'{self.parent} {self.date}'
+
+
+class ReminderANM(models.Model):
+
+    user = models.ForeignKey(
+        'account.ANMUser', related_name='reminders_anm', on_delete=models.CASCADE)
+
+    vaccine = models.ForeignKey(
+        'parent.Vaccine', related_name='reminders_anm', on_delete=models.CASCADE)
+    child = models.ForeignKey(
+        'parent.Child', related_name="reminders_anm", on_delete=models.CASCADE)
+    date = models.DateField()
+
+    def __str__(self):
+        return f'{self.child} {self.date}'

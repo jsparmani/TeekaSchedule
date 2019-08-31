@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'account',
     'location',
     'parent',
+    'anm'
 ]
 
 MIDDLEWARE = [

@@ -5,7 +5,6 @@ from account import models as acc_models
 from datetime import datetime
 from datetime import timedelta
 
-
 # Create your views here.
 
 
@@ -23,11 +22,26 @@ def add_child(request):
 
             vaccine_list = models.VaccinationData.objects.all()
             for vaccine in vaccine_list:
-                models.Vaccine.objects.create(
+                vac = models.Vaccine.objects.create(
                     child=child,
                     name=vaccine.name,
                     date=child.dob + timedelta(days=vaccine.duration),
                     status=False
+                )
+                models.ReminderANM.objects.create(
+                    user=acc_models.ANMUser.objects.get(
+                        locality__exact=child.parent.address),
+                    vaccine=vac,
+                    child=child,
+                    date=child.dob + timedelta(days=vaccine.duration-7)
+                )
+
+                models.ReminderANM.objects.create(
+                    user=acc_models.ANMUser.objects.get(
+                        locality__exact=child.parent.address),
+                    vaccine=vac,
+                    child=child,
+                    date=child.dob + timedelta(days=vaccine.duration)
                 )
 
             return redirect('home')

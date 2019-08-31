@@ -11,9 +11,9 @@ class User(auth.models.User, auth.models.PermissionsMixin):
 
 class ParentUser(models.Model):
 
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         auth.models.User, related_name='parentusers', on_delete=models.CASCADE)
-    address = models.ForeignKey(
+    address = models.OneToOneField(
         'location.Locality', related_name='parents', on_delete=models.CASCADE, blank=True, null=True)
     f_name = models.CharField(max_length=50, blank=True)
     m_name = models.CharField(max_length=50, blank=True)
@@ -29,10 +29,11 @@ class ParentUser(models.Model):
 
 class ANMUser(models.Model):
 
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         auth.models.User, related_name='anmusers', on_delete=models.CASCADE)
-    locality = models.ForeignKey(
+    locality = models.OneToOneField(
         'location.Locality', related_name='anmuserlocalities', on_delete=models.CASCADE)
+    phone = models.PositiveIntegerField()
 
     def __str__(self):
         return self.user.username
@@ -40,9 +41,9 @@ class ANMUser(models.Model):
 
 class WardUser(models.Model):
 
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         auth.models.User, related_name='wardusers', on_delete=models.CASCADE)
-    ward = models.ForeignKey(
+    ward = models.OneToOneField(
         'location.Ward', related_name='wardusersward', on_delete=models.CASCADE)
 
     def __str__(self):
@@ -51,9 +52,9 @@ class WardUser(models.Model):
 
 class ClusterUser(models.Model):
 
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         auth.models.User, related_name='clusterusers', on_delete=models.CASCADE)
-    cluster = models.ForeignKey(
+    cluster = models.OneToOneField(
         'location.Cluster', related_name='clusteruserscluster', on_delete=models.CASCADE)
 
     def __str__(self):

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load form_loop %}
+{% block content %}
+{% for parent in parent_list %}
+<a href="#">{{parent.f_name}}</a>
+{% for child in parent|child %}
+    <a href={% url 'parent:list_child_vaccine' pk=child.pk %}>{{child.name}}</a>
+{% endfor %}
+{% endfor %}
+{% endblock %}
