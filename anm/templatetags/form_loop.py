@@ -13,5 +13,9 @@ def form_loop(value, arg):
 def child(value):
     x = parent_models.Child.objects.all().filter(
         parent__user__username__exact=value)
-    print(value)
     return x
+
+
+@register.filter
+def get_vaccine_count(value):
+    return parent_models.Vaccine.objects.all().filter(child__name__exact=value, status__exact=True).count()
