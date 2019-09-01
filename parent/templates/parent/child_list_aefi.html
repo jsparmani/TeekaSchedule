@@ -1,7 +1,35 @@
-{% extends 'base.html' %} {% block content %}
-<ul>
-    {% for child in child_list %}
-    <li><a href="{% url 'parent:report_aefi' pk=child.pk %}">{{child.name}}</a></li>
-    {% endfor %}
-</ul>
+{% extends 'base.html' %}
+{% block head %}
+
+{% endblock %}
+{% block content %}
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col l10 m10 s10 offset-m1 offset-l1 offset-s1">
+            <table class="striped indigo lighten-3">
+                <thead class="indigo">
+                    <tr>
+                        <thead><h5>Child's Name</h5></thead>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for child in child_list %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'parent:report_aefi' pk=child.pk %}" class="white-text">{{child.name}}</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
 {% endblock %}

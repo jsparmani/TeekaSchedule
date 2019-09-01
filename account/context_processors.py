@@ -12,4 +12,7 @@ def UserList(request):
     cluster_all = [u['user']
                    for u in models.ClusterUser.objects.all().values('user')]
 
-    return {'parent_all': parent_all, 'anm_all': anm_all, 'ward_all': ward_all, 'cluster_all': cluster_all}
+    district_all = [u['user']
+                    for u in models.DistrictUser.objects.all().values('user')]
+
+    return {'parent_all': parent_all, 'anm_all': anm_all, 'ward_all': ward_all, 'cluster_all': cluster_all, 'district_all': district_all}

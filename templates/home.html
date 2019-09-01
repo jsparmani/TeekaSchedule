@@ -1,52 +1,59 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
 
 <div class="slider">
     <ul class="slides">
         <li>
-            <img src="https://images.pexels.com/photos/1750566/pexels-photo-1750566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+            <img
+                src="https://images.pexels.com/photos/1750566/pexels-photo-1750566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
             <!-- random image -->
             <div class="caption center-align">
                 <h3>Fact 1</h3>
                 <h5 class="light grey-text text-lighten-3">
-                    Dengue fever is a disease caused by a family of viruses transmitted by Aedes mosquitoes.
+                
                 </h5>
             </div>
         </li>
         <li>
-            <img src="https://images.pexels.com/photos/1750566/pexels-photo-1750566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+            <img
+                src="https://images.pexels.com/photos/1750566/pexels-photo-1750566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
             <!-- random image -->
             <div class="caption left-align">
                 <h3>Fact 2</h3>
                 <h5 class="light grey-text text-lighten-3">
-                    Dengue virus is prevalent throughout the tropics and subtropics.
+                    
                 </h5>
             </div>
         </li>
         <li>
-            <img src="https://images.pexels.com/photos/1750566/pexels-photo-1750566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+            <img
+                src="https://images.pexels.com/photos/1750566/pexels-photo-1750566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
             <!-- random image -->
             <div class="caption right-align">
                 <h3>Fact 3</h3>
                 <h5 class="light grey-text text-lighten-3">
-                    Papaya leaf extract can treat dengue fever.
+                    
                 </h5>
             </div>
         </li>
         <li>
-            <img src="https://images.pexels.com/photos/1750566/pexels-photo-1750566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+            <img
+                src="https://images.pexels.com/photos/1750566/pexels-photo-1750566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
             <!-- random image -->
             <div class="caption center-align">
                 <h3>Fact 4</h3>
                 <h5 class="light grey-text text-lighten-3">
-                    The prevention of dengue fever requires control or eradication of the mosquitoes carrying the virus that causes dengue.
+                    
                 </h5>
             </div>
         </li>
     </ul>
 </div>
 
-{% endblock %} {% comment %}
-<a href="{% url 'location:get_nearby_hospital' %}">Nearby Immunisation Centers</a> {% if user.is_authenticated %} {% if user.pk in parent_all %}
+{% endblock %}
+{% comment %}
+<a href="{% url 'location:get_nearby_hospital' %}">Nearby Immunisation Centers</a> {% if user.is_authenticated %}
+{% if user.pk in parent_all %}
 <a href="{% url 'account:get_parent_details' %}">Fill Details</a>
 <a href="{% url 'parent:add_child' %}">Add Child</a>
 <a href="{% url 'parent:edit_vaccine_child' %}">Edit Vaccines</a>

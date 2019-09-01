@@ -32,6 +32,9 @@ class Vaccine(models.Model):
     date = models.DateField()
     status = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ['-pk']
+
     def __str__(self):
         return f'{self.name}-{self.child}'
 
@@ -64,7 +67,8 @@ class ReminderANM(models.Model):
 
 
 class AEFI(models.Model):
-    child = models.ForeignKey('parent.Child', related_name='AEFIs', on_delete=models.CASCADE)
+    child = models.ForeignKey(
+        'parent.Child', related_name='AEFIs', on_delete=models.CASCADE)
     vaccine = models.CharField(max_length=100)
     pain = models.BooleanField()
     swelling = models.BooleanField()
@@ -73,7 +77,6 @@ class AEFI(models.Model):
     irritability = models.BooleanField()
     malaise = models.BooleanField()
     crying = models.BooleanField()
-
 
     def __str__(self):
         return self.child.name

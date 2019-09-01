@@ -5,7 +5,8 @@ app_name = 'parent'
 
 urlpatterns = [
     path('add-child/', views.add_child, name='add_child'),
-    path('child-list-edit-vaccine/', views.edit_vaccine_child, name='edit_vaccine_child'),
+    path('child-list-edit-vaccine/',
+         views.edit_vaccine_child, name='edit_vaccine_child'),
     path('child-list-aefi/', views.report_aefi_child, name='child_list_aefi'),
     path('edit-vaccine/<int:pk>/', views.edit_vaccine, name='edit_vaccine'),
     path('set-reminder/', views.set_reminder, name='set_reminder'),

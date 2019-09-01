@@ -10,15 +10,15 @@
             <table class="striped indigo lighten-3">
                 <thead class="indigo">
                     <tr>
-                        <thead><h5>Child's Name</h5></thead>
+                        <thead><h5>Ward</h5></thead>
                     </tr>
                 </thead>
 
                 <tbody>
-                    {% for child in child_list %}
+                    {% for ward in ward_list %}
                     <tr>
                         <td>
-                            <a href="{% url 'parent:edit_vaccine' pk=child.pk %}" class="white-text">{{child.name}}</a>
+                            <a href="{% url 'analyze:ward_level_indirect_analysis' pk=ward.pk %}" class="white-text">{{ward.ward_id}}</a>
                         </td>
                     </tr>
                     {% endfor %}

@@ -7,7 +7,9 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
 from datetime import datetime
 from location import models as loc_models
+import requests
 # Create your views here.
+api_key = '292a8d1f-295e-11e9-9ee8-0200cd936042'
 
 
 def get_parent_username(request):
@@ -27,6 +29,9 @@ def get_parent_username(request):
                 return redirect('fault', fault="Server Error!")
 
             print(otp)
+
+            # link = f'https://2factor.in/API/R1/?module=TRANS_SMS&apikey={api_key}&to={username}&from=ECIWEB&templatename=OTP&var1=Sir&var2={otp}'
+            # requests.get(link)
 
             return redirect('account:get_parent_otp', pk=otp_user.pk)
 

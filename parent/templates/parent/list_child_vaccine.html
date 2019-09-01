@@ -1,8 +1,43 @@
 {% extends 'base.html' %}
 {% block content %}
-<ul>
-{% for vaccine in vaccine_list %}
-    <li>{{vaccine.name}} - {{vaccine.date}} - {{vaccine.status}}</li>
-{% endfor %}
-</ul>
+
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col l10 m10 s10 offset-m1 offset-l1 offset-s1">
+            <table class="striped indigo lighten-3">
+                <thead class="indigo">
+                    <tr>
+                        <th>Vaccine Name</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for vaccine in vaccine_list %}
+                    <tr>
+                        <td class="black-text">
+                            {{vaccine.name}}
+                        </td>
+                        <td class="black-text">
+                            {{vaccine.date}}
+                        </td>
+                        <td class="black-text">
+                            {% if vaccine.status == 0 %}
+                            <i class="material-icons red-text text-lighten-2">clear</i>
+                            {% else %}
+                            <i class="material-icons green-text">check</i>
+
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

@@ -51,14 +51,71 @@
                     <i class="material-icons">menu</i>
                 </a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="#">Photos</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
+                    {% if user.pk in parent_all %}
+                        <li><a href="{% url 'account:get_parent_details' %}">Update Details</a></li>
+                        <li><a href="{% url 'parent:add_child' %}">Add Child</a></li>
+                        <li><a href="{% url 'parent:set_reminder' %}">Set Reminders</a></li>
+                        <li><a href="{% url 'parent:edit_vaccine_child' %}">Vac. Status</a></li>
+                        <li><a href="{% url 'parent:child_list_aefi' %}">File AEFI</a></li>
+
+                    {% endif %}
+                    {% if user.pk in anm_all %}
+                        <li><a href="{% url 'anm:get_parent_list' %}" class="white-text">Parent List</a></li>
+                    {% endif %}
+                    {% if user.pk in ward_all %}
+                        <li><a href="{% url 'analyze:ward_level_analysis' %}" class="white-text">Ward Level Analysis</a></li>
+                    {% endif %}
+
+                    {% if user.pk in cluster_all %}
+                        <li><a href="{% url 'analyze:cluster_level_analysis' %}" class="white-text">Cluster Level Analysis</a></li>
+                        <li><a href="{% url 'analyze:ward_list' %}" class="white-text">Ward Level Analysis</a></li>
+                    {% endif %}
+
+
+                    {% if user.pk in district_all %}
+                        <li><a href="{% url 'analyze:district_level_analysis' %}" class="white-text">District Level Analysis</a></li>
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'account:logout' %}">Logout</a></li>
+                    {% else %}
+                    
+                    <li><a href="{% url 'account:login' %}">Admin Login</a></li>
+                    <li><a href="{% url 'account:get_parent_username' %}">Parent Login</a></li>
+                    {% endif %}
                 </ul>
                 <ul class="sidenav indigo" id="mobile-menu">
-                    <li><a href="#" class="white-text">Photos</a></li>
-                    <li><a href="#" class="white-text">Services</a></li>
-                    <li><a href="#" class="white-text">Contact</a></li>
+                    {% if user.pk in parent_all %}
+                        <li><a href="{% url 'account:get_parent_details' %}" class="white-text">Update Details</a></li>
+                        <li><a href="{% url 'parent:add_child' %}" class="white-text">Add Child</a></li>
+                        <li><a href="{% url 'parent:set_reminder' %}" class="white-text">Set Reminders</a></li>
+                        <li><a href="{% url 'parent:edit_vaccine_child' %}" class="white-text">Vac. Status</a></li>
+                        <li><a href="{% url 'parent:child_list_aefi' %}" class="white-text">File AEFI</a></li>
+
+                    {% endif %}
+                    {% if user.pk in anm_all %}
+                        <li><a href="{% url 'anm:get_parent_list' %}" class="white-text">Parent List</a></li>
+                    {% endif %}
+
+                    {% if user.pk in ward_all %}
+                        <li><a href="{% url 'analyze:ward_level_analysis' %}" class="white-text">Ward Level Analysis</a></li>
+                    {% endif %}
+
+                    {% if user.pk in cluster_all %}
+                        <li><a href="{% url 'analyze:cluster_level_analysis' %}" class="white-text">Cluster Level Analysis</a></li>
+                        <li><a href="{% url 'analyze:ward_list' %}" class="white-text">Ward Level Analysis</a></li>
+                    {% endif %}
+
+                    {% if user.pk in district_all %}
+                        <li><a href="{% url 'analyze:district_level_analysis' %}" class="white-text">District Level Analysis</a></li>
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'account:logout' %}" class="white-text">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'account:login' %}" class="white-text">Admin Login</a></li>
+                    <li><a href="{% url 'account:get_parent_username' %}" class="white-text">Parent Login</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
@@ -74,10 +131,10 @@
                 <br>
                 <span>Home</span>
             </div>
-            <div class="tab_2 col s4 l4 m4" onclick="loginFunc('')">
-                <i class="material-icons info-icon" style="margin-left: 7px;">info</i>
+            <div class="tab_2 col s4 l4 m4" onclick="loginFunc('location/show-nearby-hospitals')">
+                <i class="material-icons info-icon" style="margin-left: 7px;">map</i>
                 <br>
-                <span>About</span>
+                <span>Immunisation</span>
             </div>
             {% if user.is_authenticated %}
             <div class="tab_3 col s4 l4 m4" onclick="loginFunc('account/logout')">

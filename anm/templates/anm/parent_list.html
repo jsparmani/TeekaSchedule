@@ -1,3 +1,50 @@
-{% extends 'base.html' %} {% load form_loop %} {% block content %} {% for parent in parent_list %}
-<span>{{parent.f_name}}</span> {% for child in parent|child %}
-<a href={% url 'parent:list_child_vaccine' pk=child.pk %}>{{child.name}}</a>&nbsp;<progress value="{{child|get_vaccine_count}}" max="20"></progress> {% endfor %} {% endfor %} {% endblock %}
+{% extends 'base.html' %}
+{% load form_loop %}
+{% block content %}
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col l10 m10 s10 offset-m1 offset-l1 offset-s1">
+            <table class="striped indigo lighten-3">
+                <t class="indigo">
+                    <tr>
+                        <th>
+                            <h5>Father's Name</h5>
+                        </th>
+
+
+                        <th>
+                            <h5>Child's Name</h5>
+                        </th>
+
+
+                        <th>
+                            <h5>Progress</h5>
+                        </th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for parent in parent_list %}
+                        {% for child in parent|child %}
+                        <tr>
+                            <td>
+                                {{parent.f_name}}
+                            </td>
+                            <td>
+                                <a href={% url 'parent:list_child_vaccine' pk=child.pk %}
+                                    class="white-text">{{child.name}}</a>
+                            </td>
+                            <td>
+                                <progress value="{{child|get_vaccine_count}}" max="20" class="white-text"></progress>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endfor %}
+
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
