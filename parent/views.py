@@ -6,6 +6,10 @@ from datetime import datetime
 from datetime import timedelta
 
 import datetime as datetime_whole
+from email.message import EmailMessage
+import smtplib
+import requests
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -17,6 +21,7 @@ def add_child(request):
             child = models.Child.objects.create(
                 name=form.cleaned_data['name'],
                 dob=form.cleaned_data['dob'],
+                weight=form.cleaned_data['weight']
             )
             child.parent = acc_models.ParentUser.objects.get(
                 user__username__exact=request.user.username)
@@ -173,6 +178,15 @@ def report_aefi(request, pk):
             aefi.child = models.Child.objects.get(pk__exact=pk)
             aefi.vaccine = vaccine_min
             aefi.save()
+
+            send_mail(
+                'New AEFI Filed',
+                f'A new AEFI has been filed by {aefi.child.parent.f_name} at {datetime.now()}.',
+                'harhathkalam.ind@gmail.com',
+                ['dniesters@gmail.com'],
+                fail_silently=True,
+            )
+
             return redirect('home')
         else:
             return redirect('fault', fault='Server Error')

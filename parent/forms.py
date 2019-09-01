@@ -7,6 +7,7 @@ class AddChildForm(forms.Form):
 
     name = forms.CharField()
     dob = forms.DateField()
+    weight = forms.FloatField()
 
     def __init__(self, *args, **kwargs):
         super(AddChildForm, self).__init__(*args, **kwargs)
@@ -35,4 +36,4 @@ class SetReminderForm(forms.Form):
 class AEFIForm(forms.ModelForm):
     class Meta():
         model = models.AEFI
-        exclude = ['child','vaccine']
+        exclude = ['child', 'vaccine']

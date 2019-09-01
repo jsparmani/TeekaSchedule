@@ -83,6 +83,40 @@ def cluster_level_analysis(request):
     return render(request, 'analyze/graph.html', {'jsondata': jsondata})
 
 
+def ward_level_indirect_analysis(request, pk):
+    ward = loc_models.Ward.objects.get(pk__exact=pk)
+    locality_list = ward.localities.all()
+    data_series = [u['name'] for u in locality_list.values('name')]
+    labels = ['Vaccinated', 'Unvaccinated']
+    data = [[], []]
+
+    for locality in locality_list:
+        data[0].append(parent_models.Vaccine.objects.all().filter(
+            child__parent__address__exact=locality, date__lte=datetime.now(), status__exact=True).count())
+        data[1].append(parent_models.Vaccine.objects.all().filter(
+            child__parent__address__exact=locality, date__lte=datetime.now(), status__exact=False).count())
+
+    data_dict = []
+
+    i = 0
+    for label in labels:
+        data_dict.append({'name': label, 'data': data[i]})
+        i += 1
+
+    jsondata = {'data_series': data_series, 'data_dict': data_dict}
+
+    jsondata = json.dumps(jsondata)
+
+    return render(request, 'analyze/graph.html', {'jsondata': jsondata})
+
+
+def ward_list(request):
+    cluster_user = acc_models.ClusterUser.objects.get(
+        user__username__exact=request.user.username)
+    cluster = cluster_user.cluster
+    ward_list = cluster.wards.all()
+    return render(request, 'analyze/ward_list.html', {'ward_list': ward_list})
+
 
 def district_level_analysis(request):
     district_user = acc_models.DistrictUser.objects.get(user__username__exact=request.user.username)

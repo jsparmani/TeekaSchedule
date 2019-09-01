@@ -7,6 +7,7 @@ class Child(models.Model):
     dob = models.DateField(blank=False)
     parent = models.ForeignKey(
         'account.ParentUser', related_name='children', on_delete=models.CASCADE, blank=True, null=True)
+    weight = models.FloatField(blank=False)
 
     def __str__(self):
         return self.name

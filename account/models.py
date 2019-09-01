@@ -20,8 +20,8 @@ class ParentUser(models.Model):
     f_dob = models.DateField(blank=True, null=True)
     m_dob = models.DateField(blank=True, null=True)
 
-    reminder_days = models.IntegerField(blank=True, null=True)
-    reminder_frequency = models.IntegerField(blank=True, null=True)
+    reminder_days = models.IntegerField(blank=True, null=True, default=1)
+    reminder_frequency = models.IntegerField(blank=True, null=True, default=1)
 
     def __str__(self):
         return self.user.username

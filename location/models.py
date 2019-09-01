@@ -13,7 +13,6 @@ class District(models.Model):
         return f'{self.district_id}'
 
 
-
 class Cluster(models.Model):
     district = models.ForeignKey(
         'location.District', related_name='clusters', on_delete=models.CASCADE)
