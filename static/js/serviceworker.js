@@ -1,12 +1,14 @@
+
 const staticCacheName = 'site-static';
 const assets = [
     '/',
-    '/static/materialize.min.css',
-    '/static/materialize.min.js',
+    '/static/css/materialize.min.css',
+    '/static/js/materialize.min.js',
     'https://fonts.googleapis.com/icon?family=Material+Icons',
     'https://fonts.gstatic.com/s/materialicons/v47/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2',
     'https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2',
-    'https://code.jquery.com/jquery-3.4.1.min.js'
+    "https://code.jquery.com/jquery-3.4.1.min.js",
+    "https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2 "
 ];
 
 // install event
@@ -45,3 +47,4 @@ self.addEventListener('fetch', evt => {
             })
     )
 });
+

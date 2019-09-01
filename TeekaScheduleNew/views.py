@@ -24,7 +24,6 @@ def home(request):
         reminders_anm = parent_models.ReminderANM.objects.all().filter(
             date__exact=datetime.now())
 
-
         for reminder in reminders_anm:
             # print(reminder.user.phone)
             # print(reminder.child.name,
@@ -49,7 +48,7 @@ def home(request):
             # )
 
             #link = f'https://2factor.in/API/R1/?module=TRANS_SMS&apikey=563c8dff-70b3-11e9-ade6-0200cd936042&to={acc_models.ANMUser.objects.get(locality__exact=v.child.parent.address).phone}&from=TKSCHD&templatename=Reminders+for+ANM+Missing&var1={v.child.name}&var2={v.child.parent.f_name}&var3={v.name}&var4={v.date}'
-            #requests.get(link)
+            # requests.get(link)
 
     automatic_task()
     return render(request, 'home.html')
@@ -57,6 +56,10 @@ def home(request):
 
 def fault(request, fault):
     return render(request, 'fault.html', {'fault': fault})
+
+
+def info(request):
+    return render(request, 'info.html')
 
 
 def script(request):

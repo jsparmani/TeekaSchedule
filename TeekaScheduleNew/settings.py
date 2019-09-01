@@ -16,7 +16,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
-# PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/js', 'sw.js')
+PWA_SERVICE_WORKER_PATH = os.path.join(
+    BASE_DIR, 'static/js', 'serviceworker.js')
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +29,7 @@ SECRET_KEY = '4!7$7tbq3lyr@=@_$5vbvpsjj5jopr=seu5*+e^ibv@_xv3i3k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.137.1', '127.0.0.1']
 
 
 # Application definition
@@ -149,3 +150,36 @@ EMAIL_HOST_PASSWORD = 'EMAIL_HOST_PASSWORD'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = MEDIA_DIR
+
+
+PWA_APP_NAME = 'Teeka'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_START_URL = '/'
+PWA_APP_ICONS = [
+    {
+        "src": "/static/img/icons/new_icons/icon-120x120.png",
+        "type": "image/png",
+        "sizes": "128x128"
+    },
+
+    {
+        "src": "/static/img/icons/new_icons/icon-152x152.png",
+        "type": "image/png",
+        "sizes": "152x152"
+    },
+    {
+        "src": "/static/img/icons/new_icons/icon-167x167.png",
+        "type": "image/png",
+        "sizes": "192x192"
+    },
+    {
+        "src": "/static/img/icons/new_icons/icon-180x180.png",
+        "type": "image/png",
+        "sizes": "384x384"
+    },
+    {
+        "src": "/static/img/icons/new_icons/icon-144x133.png",
+        "type": "image/png",
+        "sizes": "512x512"
+    }
+]

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-
+{% load pwa %}
 {% load staticfiles %}
 <html lang="en">
 
 <head>
-    
+    {% progressive_web_app_meta %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabs</title>
@@ -84,9 +84,13 @@
                     
                     <li><a href="{% url 'account:login' %}">Admin Login</a></li>
                     <li><a href="{% url 'account:get_parent_username' %}">Parent Login</a></li>
+                    <li><a href="{% url 'info' %}">Immunization Info</a></li>
+
                     {% endif %}
                 </ul>
                 <ul class="sidenav indigo" id="mobile-menu">
+                <br>
+                <br>
                     {% if user.pk in parent_all %}
                         <li><a href="{% url 'account:get_parent_details' %}" class="white-text">Update Details</a></li>
                         <li><a href="{% url 'parent:add_child' %}" class="white-text">Add Child</a></li>
@@ -117,6 +121,9 @@
                     {% else %}
                     <li><a href="{% url 'account:login' %}" class="white-text">Admin Login</a></li>
                     <li><a href="{% url 'account:get_parent_username' %}" class="white-text">Parent Login</a></li>
+                    <li><a href="{% url 'info' %}" class="white-text">Info</a></li>
+                    <li><a href="https://chat.whatsapp.com/Fr2zV6BZvCR7WuijvLaL0r" class="white-text">Connect to Doctors</a></li>
+
                     {% endif %}
                 </ul>
             </div>
@@ -126,17 +133,17 @@
     {% block content %}
     {% endblock %}
 
-    <div class="row footer-tabs hide-on-med-and-up">
+    <div class="row footer-tabs hide-on-med-and-up white " style= "margin-bottom: 0px;">
         <div class="col s12 l12 m12" style="margin-left: 25px;">
             <div class="tab_1 col s4 l4 m4" onclick="loginFunc('')">
                 <i class="material-icons home-icon" style="margin-left: 6px;">home</i>
                 <br>
-                <span>Home</span>
+                <span style="cursor:pointer">Home</span>
             </div>
-            <div class="tab_2 col s4 l4 m4" onclick="loginFunc('location/show-nearby-hospitals')">
+            <div class="tab_2 col s4 l4 m4" onclick="redirectMap()">
                 <i class="material-icons info-icon" style="margin-left: 7px;">map</i>
                 <br>
-                <span>Immunisation</span>
+                <span style="margin-left:-20px;">Immunisation</span>
             </div>
             {% if user.is_authenticated %}
             <div class="tab_3 col s4 l4 m4" onclick="loginFunc('account/logout')">
@@ -156,7 +163,7 @@
     </div>
 
 
-
+<script src="https://code.highcharts.com/highcharts.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
@@ -166,6 +173,10 @@
         let loginFunc = str => {
             var url = `${BASE_URL}/${str}`
             window.location.href = url;
+        }
+
+        let redirectMap = () => {
+            window.location.href = 'http://127.0.0.1:8000/location/show-nearby-hospitals'
         }
 
         $(document).ready(function () {

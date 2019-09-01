@@ -1,55 +1,48 @@
 {% extends 'base.html' %}
+{% block head %}
+{% load static %}
+{% endblock %}
 {% block content %}
 
-<div class="slider">
+ <div class="slider">
     <ul class="slides">
-        <li>
-            <img
-                src="https://images.pexels.com/photos/1750566/pexels-photo-1750566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
-            <!-- random image -->
-            <div class="caption center-align">
-                <h3>Fact 1</h3>
-                <h5 class="light grey-text text-lighten-3">
-                
-                </h5>
-            </div>
-        </li>
-        <li>
-            <img
-                src="https://images.pexels.com/photos/1750566/pexels-photo-1750566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
-            <!-- random image -->
-            <div class="caption left-align">
-                <h3>Fact 2</h3>
-                <h5 class="light grey-text text-lighten-3">
-                    
-                </h5>
-            </div>
-        </li>
-        <li>
-            <img
-                src="https://images.pexels.com/photos/1750566/pexels-photo-1750566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
-            <!-- random image -->
-            <div class="caption right-align">
-                <h3>Fact 3</h3>
-                <h5 class="light grey-text text-lighten-3">
-                    
-                </h5>
-            </div>
-        </li>
-        <li>
-            <img
-                src="https://images.pexels.com/photos/1750566/pexels-photo-1750566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
-            <!-- random image -->
-            <div class="caption center-align">
-                <h3>Fact 4</h3>
-                <h5 class="light grey-text text-lighten-3">
-                    
-                </h5>
-            </div>
-        </li>
+      <li>
+        <img src="{% static 'img/vaccine_needle-732x549-thumbnail.jpg' %}"> <!-- random image -->
+        <div class="caption center-align">
+          <h3>This is our big Tagline!</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'img/vaccine_needle-732x549-thumbnail.jpg' %}"> <!-- random image -->
+        <div class="caption left-align">
+          <h3>Left Aligned Caption</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'img/vaccine_needle-732x549-thumbnail.jpg' %}"> <!-- random image -->
+        <div class="caption right-align">
+          <h3>Right Aligned Caption</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'img/vaccine_needle-732x549-thumbnail.jpg' %}"> <!-- random image -->
+        <div class="caption center-align">
+          <h3>This is our big Tagline!</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
+      </li>
     </ul>
-</div>
+  </div>
 
+  <div class="section white">
+      <div class="row container">
+        <h2 class="header">Immunisation</h2>
+        <p class="grey-text text-darken-3 lighten-3">Immunization, or immunisation, is the process by which an individual's immune system becomes fortified against an agent (known as the immunogen).</p>
+      </div>
+    </div>
 {% endblock %}
 {% comment %}
 <a href="{% url 'location:get_nearby_hospital' %}">Nearby Immunisation Centers</a> {% if user.is_authenticated %}

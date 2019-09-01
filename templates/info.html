@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block head %}
+{% load static %}
+{% endblock %}
+{% block content %}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <div class="parallax-container">
+        <div class="parallax"><img src="{% static 'img/flu+vaccine+mgn+zaldyImg+Flickr+CC+BY+20+pixaby.jpg' %}"></div>
+    </div>
+
+    <div class="section white">
+        <div class="row container">
+            <h2 class="header">Rare vaccine-induced AEFIs </h2>
+            <h5>Anaphylaxis</h5>
+            <p class="grey-text text-darken-3 lighten-3">Anaphylactic reactions to vaccines are extremely rare but have
+                the potential to
+                be fatal. Between 1997 and 2003, there were 130 reports to the Medicines and
+                Healthcare products Regulatory Agency (MHRA) of anaphylaxis or
+                anaphylactic-type reactions following immunisation (excluding the meningitis
+                C campaign), although no deaths as a result of the reaction were reported.
+                Anaphylaxis is likely when all of the following three criteria are met: <br>
+                <br>
+                ● sudden onset and rapid progression of symptoms <br>
+                ● life-threatening airway and/or breathing and/or circulation problems <br>
+                ● skin and/or mucosal changes (flushing, urticaria, angioedema). <br>
+                The following supports the diagnosis: <br>
+                ● exposure to a known allergen where the patient is already known to be allergic. <br>
+                Remember: <br>
+                ● skin or mucosal changes alone are not a sign of an anaphylactic reaction <br>
+                ● skin and mucosal changes can be subtle or absent in up to 20% of reactions <br>
+                (some patients can have only a decrease in blood pressure, i.e. a circulation <br>
+                problem) <br>
+                ● there can also be gastrointestinal symptoms (e.g. vomiting, abdominal pain,
+                incontinence) </p>
+
+            <h5>Differential diagnosis </h5>
+            <p class="grey-text text-darken-3 lighten-3">Fainting is relatively common when vaccinating adults and
+                adolescents, but
+                infants and children rarely faint. Sudden loss of consciousness in young
+                children should be presumed to be an anaphylactic reaction, particularly if a
+                strong central pulse is absent. A strong central pulse persists during a faint or
+                seizure.
+                The features listed in Table 8.1 differentiate between anaphylaxis and fainting.
+                If the diagnosis is unclear, anaphylaxis should be presumed and appropriate
+                management given.
+                There should be rapid recovery from fainting. Although symptoms of malaise
+                may persist, the patient should recover consciousness within a few minutes. </p>
+
+                <h5><b>Immediate actions</b> </h5>
+                <p class="grey-text text-darken-3 lighten-3">1 Send for additional health professional assistance <br>
+                        2 Send a responsible adult to dial 999 and state that there is a case 
+                        of suspected anaphylaxis. <br>
+                        3 Stay with the patient at all times. <br>
+                        4 Lie the patient down, ideally with the legs raised (unless the 
+                        patient has breathing difficulties). <br>
+                        5 Administer oxygen if available. <br>
+                        6 If breathing stops, mouth to mouth/mask resuscitation should be
+                        performed. <br>
+                        7 If there is no pulse, start cardiopulmonary resuscitation. <br>
+                        All patients with clinical signs of shock, airway swelling or definite
+                        breathing difficulties should be given adrenaline (epinephrine) 1:1000
+                        administered by intramuscular (IM) injection (never subcutaneously).
+                        For information on dosage to be given see below. The preferred site is
+                        the mid-point of the anterolateral aspect of the thigh (Simons et al.,
+                        1998). If there is no clinical improvement, the dose may be repeated
+                        after five minutes. Further doses of adrenaline can be given if needed. 
+                          </p>
+                        
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var elems = document.querySelectorAll('.parallax');
+                var instances = M.Parallax.init(elems, options);
+            });
+
+            // Or with jQuery
+
+            $(document).ready(function () {
+                $('.parallax').parallax();
+            });
+
+        </script>
+
+{% endblock %}
