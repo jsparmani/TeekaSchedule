@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block head %}
+{% load static %}
+{% endblock %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
+
+<div class="section white">
+    <div class="row container">
+        <h2 class="header">Frequently Asked Questions</h2>
+        <h5>What is AEFI?</h5>
+        <p class="grey-text text-darken-3 lighten-3">Adverse event following immunization (AEFI): A medical incident
+            that takes place after an immunization,
+            causes concern, and is believed to be caused by immunization
+            AEFI surveillance: monitoring, detecting and responding to adverse events following immunization
+            (AEFI); Implementing appropriate and immediate action to correct any unsafe practices detected through
+            the AEFI surveillance system, in order to lessen the negative impact on the health of individuals and the
+            reputation of the immunization programme.</p>
+        <h5>What is 'Set Reminder'?</h5>
+        <p class="grey-text text-darken-3 lighten-3">You can add number of days before you want to get notified for the
+            upcmoing vaccination schedule. You can also set frequency of reminders which will be responcible that how
+            often you want to get notified before vaccination. </p>
+
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.parallax');
+            var instances = M.Parallax.init(elems, options);
+        });
+
+        // Or with jQuery
+
+        $(document).ready(function () {
+            $('.parallax').parallax();
+        });
+
+    </script>
+
+    {% endblock %}

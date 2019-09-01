@@ -30,6 +30,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('', include('pwa.urls')),
     path('script/', views.script, name='script'),
+    path('faq/', views.faq, name='faq'),
     path('info/', views.info, name='info'),
     path('fault/<str:fault>/', views.fault, name='fault'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

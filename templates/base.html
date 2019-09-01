@@ -85,6 +85,8 @@
                     <li><a href="{% url 'account:login' %}">Admin Login</a></li>
                     <li><a href="{% url 'account:get_parent_username' %}">Parent Login</a></li>
                     <li><a href="{% url 'info' %}">Immunization Info</a></li>
+                    <li><a href="{% url 'faq' %}">FAQ</a></li>
+
 
                     {% endif %}
                 </ul>
@@ -97,6 +99,7 @@
                         <li><a href="{% url 'parent:set_reminder' %}" class="white-text">Set Reminders</a></li>
                         <li><a href="{% url 'parent:edit_vaccine_child' %}" class="white-text">Vac. Status</a></li>
                         <li><a href="{% url 'parent:child_list_aefi' %}" class="white-text">File AEFI</a></li>
+
 
                     {% endif %}
                     {% if user.pk in anm_all %}
@@ -121,7 +124,9 @@
                     {% else %}
                     <li><a href="{% url 'account:login' %}" class="white-text">Admin Login</a></li>
                     <li><a href="{% url 'account:get_parent_username' %}" class="white-text">Parent Login</a></li>
-                    <li><a href="{% url 'info' %}" class="white-text">Info</a></li>
+                    <li><a href="{% url 'info' %}" class="white-text">Immunization Info</a></li>
+                    <li><a href="{% url 'faq' %}">FAQ</a></li>
+
                     <li><a href="https://chat.whatsapp.com/Fr2zV6BZvCR7WuijvLaL0r" class="white-text">Connect to Doctors</a></li>
 
                     {% endif %}

@@ -62,6 +62,10 @@ def info(request):
     return render(request, 'info.html')
 
 
+def faq(request):
+    return render(request, 'faq.html')
+
+
 def script(request):
 
     username = ['8128990569', '7486089677', '6388278796',
